@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+:root {
+    --poppins: 'Poppins', sans-serif;
+    --lato: 'Lato', sans-serif;
+
+    --licorice: #22092C;
+    --claret: #b40036;
+    --licorice-claret: #BE3144;
+    --firebrick: #750E21;
+    --dark-firebrick: #fbfeff;
+    --dark: #ffffff;
+    --red: #eb6b67;
+    --yellow: #dcbc51;
+    --licorice-yellow: #FFF2C6;
+    --orange: #eb7e4f;
+    --licorice-orange: #FFE0D3;
+}
+
+body {
+    font-family: var(--poppins);
+    background: var(--firebrick);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.form-box {
+    max-width: 400px;
+    width: 100%;
+    padding: 40px;
+    background-color: var(--dark-firebrick);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.form-box h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: var(--licorice);
+    text-align: center;
+}
+
+.inputbox {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.inputbox input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    font-size: 16px;
+    border: 1px solid var(--licorice);
+    border-radius: 5px;
+    outline: none;
+    background-color: var(--dark-firebrick);
+    color: var(--dark);
+    transition: all 0.3s;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.inputbox label {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    font-size: 16px;
+    color: var(--licorice);
+    pointer-events: none;
+    transition: all 0.3s;
+    background-color: var(--dark-firebrick); /* Match the background color */
+    padding: 0 5px; /* Add padding to match the input */
+    border-radius: 3px; /* Add border-radius to match the input */
+}
+
+.inputbox input:focus + label,
+.inputbox input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 12px;
+    color: var(--claret);
+}
+
+.inputbox ion-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
+    font-size: 20px;
+    color: var(--licorice);
+    z-index: 1; /* Ensure the icon is behind the input text */
+}
+
+.forget {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.forget label,
+.forget a {
+    font-size: 14px;
+    color: var(--licorice);
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    color: var(--dark-firebrick);
+    background-color: var(--claret);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: var(--licorice-claret);
+}
+
+.register {
+    text-align: center;
+    font-size: 14px;
+    color: var(--licorice);
+}
+
+.register a {
+    color: var(--claret);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.register a:hover {
+    color: var(--licorice-claret);
+}
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+    color: black;
+}
+

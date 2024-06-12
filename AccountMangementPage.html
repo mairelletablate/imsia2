@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <!-- My CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <title>Account Management</title>
+</head>
+<body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">
+        <a href="index.html" class="brand">
+            <i class='bx bxs-smile'></i>
+            <span class="text">DewyDoIt App</span>
+        </a>
+        <ul class="side-menu top">
+            <li>
+                <a href="index.html">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Admin Dashboard</span>
+                </a>
+            </li>
+            
+            <li class="active">
+                <a href="account_management.html">
+                    <i class='bx bxs-message-dots'></i>
+                    <span class="text">Account Management</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="settings.html">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="logout.html" class="logout">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+        <!-- NAVBAR -->
+        <nav>
+            <i class='bx bx-menu'></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <input type="checkbox" id="switch-mode" hidden>
+            <label for="switch-mode" class="switch-mode"></label>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">8</span>
+            </a>
+            <a href="#" class="profile">
+                <img src="DewyLogo.png" alt="Profile Picture">
+            </a>
+        </nav>
+        <!-- NAVBAR -->
+
+        <!-- MAIN -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Account Management</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="index.html">Admin Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a class="active" href="account_management.html">Account Management</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+
+            <!-- Add User Form -->
+            <div class="form">
+                <h3>Add New User</h3>
+                <form id="addUserForm">
+                    <input type="text" id="name" placeholder="Name" required>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <button type="submit">Add User</button>
+                    <button type="cancel-btn">Cancel</button>
+                </form>
+            </div>
+            <div class="table-data">
+                <div class="order">
+                    <div class="head">
+                        <h3>Users Information</h3>
+                        <i class='bx bx-search'></i>
+                        <i class='bx bx-filter'></i>
+                    </div>
+                    <table id="userTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Password</th>
+                                <th>Date Created</th>
+                                <th>Date Updated</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- User rows will be appended here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+    
+    <script>
+        // Mock data for demonstration purposes
+        let users = [
+            { id: 1, name: 'Mairelle', email: 'mairelle123@example.com', password: 'maimai123', created: '2023-01-01', updated: '2023-01-02' },
+            { id: 2, name: 'John Doe', email: 'john.doe@example.com', password: 'maimai123' , created: '2023-01-05', updated: '2023-01-06' }
+        ];
+
+        function renderUsers() {
+    const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+    userTableBody.innerHTML = '';
+
+    users.forEach(user => {
+        const row = userTableBody.insertRow();
+        row.insertCell(0).innerText = user.id;
+        row.insertCell(1).innerText = user.name;
+        row.insertCell(2).innerText = user.email;
+        row.insertCell(3).innerText = user.password;
+        row.insertCell(4).innerText = user.created;
+        row.insertCell(5).innerText = user.updated;
+
+        // ID cell
+        row.cells[0].setAttribute('contenteditable', true);
+        row.cells[0].addEventListener('blur', function() {
+            user.id = parseInt(this.innerText);
+        });
+
+        // Username cell
+        row.cells[1].setAttribute('contenteditable', true);
+        row.cells[1].addEventListener('blur', function() {
+            user.name = this.innerText;
+        });
+
+        // Email cell
+        row.cells[2].setAttribute('contenteditable', true);
+        row.cells[2].addEventListener('blur', function() {
+            user.email = this.innerText;
+        });
+
+        // Password cell
+        row.cells[3].setAttribute('contenteditable', true);
+        row.cells[3].addEventListener('blur', function() {
+            user.password = this.innerText;
+        });
+
+        // Created and Updated cells are not editable
+
+        const actionsCell = row.insertCell(6);
+
+        // Edit button
+        const editButton = document.createElement('button');
+        editButton.innerText = 'Update  ';
+        editButton.onclick = () => editUser(user.id);
+        actionsCell.appendChild(editButton);
+
+        // Delete button
+        const deleteButton = document.createElement('button');
+        deleteButton.innerText = 'Delete';
+        deleteButton.onclick = () => deleteUser(user.id);
+        actionsCell.appendChild(deleteButton);
+    });
+}
+
+
+        function addUser(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const newUser = {
+                id: users.length + 1,
+                name,
+                email,
+                created: new Date().toISOString().split('T')[0],
+                updated: new Date().toISOString().split('T')[0]
+            };
+
+            users.push(newUser);
+            renderUsers();
+        }
+
+    
+
+        function deleteUser(id) {
+            users = users.filter(user => user.id !== id);
+            renderUsers();
+        }
+
+        document.getElementById('addUserForm').addEventListener('submit', addUser);
+
+        // Initialize the user list on page load
+        renderUsers();
+
+        document.querySelectorAll('.status').forEach(select => {
+            select.addEventListener('change', function() {
+                // Remove previously added classes
+                this.classList.remove('completed', 'pending', 'process');
+                // Add the selected option's class
+                this.classList.add(this.value);
+            });
+
+            // Trigger the change event on page load to set the initial class
+            select.dispatchEvent(new Event('change'));
+        });
+
+        const switchMode = document.getElementById('switch-mode');
+        const body = document.body;
+
+        switchMode.addEventListener('change', () => {
+            if (switchMode.checked) {
+                body.classList.add('dark');
+            } else {
+                body.classList.remove('dark');
+            }
+        });
+
+        // Trigger the change event on page load to set the initial mode
+        window.addEventListener('load', () => {
+            switchMode.checked = localStorage.getItem('dark-mode') === 'true';
+            switchMode.dispatchEvent(new Event('change'));
+        });
+
+        // Save mode preference to localStorage
+        switchMode.addEventListener('change', () => {
+            localStorage.setItem('dark-mode', switchMode.checked);
+        });
+    </script>
+</body>
+</html>
